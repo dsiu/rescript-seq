@@ -8,7 +8,7 @@ module R = Seq__Result
 
 let characters = s => s->String.split("")->S.fromArray
 
-let joinInts = xs => xs->Array.map(Int.toString)->Array.joinWith("")
+let joinInts = xs => xs->Array.map(Int.toString(_))->Array.join("")
 
 let shorten = s => String.slice(s, ~start=0, ~end=1000)
 
@@ -278,11 +278,11 @@ let rangeTests = makeSeqEqualsTests(
 let rangeMapTests = makeSeqEqualsTests(
   ~title="rangeMap",
   [
-    (S.rangeMap(1, 1, Int.toString), ["1"], ""),
-    (S.rangeMap(1, 2, Int.toString), ["1", "2"], ""),
-    (S.rangeMap(4, 6, Int.toString), ["4", "5", "6"], ""),
-    (S.rangeMap(6, 1, Int.toString), ["6", "5", "4", "3", "2", "1"], ""),
-    (S.rangeMap(-3, 3, Int.toString), ["-3", "-2", "-1", "0", "1", "2", "3"], ""),
+    (S.rangeMap(1, 1, Int.toString(_)), ["1"], ""),
+    (S.rangeMap(1, 2, Int.toString(_)), ["1", "2"], ""),
+    (S.rangeMap(4, 6, Int.toString(_)), ["4", "5", "6"], ""),
+    (S.rangeMap(6, 1, Int.toString(_)), ["6", "5", "4", "3", "2", "1"], ""),
+    (S.rangeMap(-3, 3, Int.toString(_)), ["-3", "-2", "-1", "0", "1", "2", "3"], ""),
   ],
 )
 
@@ -810,7 +810,7 @@ let unfoldManyTests = {
 
   let format = xxx =>
     xxx
-    ->Seq.map(xx => xx->Seq.toArray->Array.joinWith(""))
+    ->Seq.map(xx => xx->Seq.toArray->Array.join(""))
     ->Seq.toArray
     ->Seq.fromArray
 
@@ -914,7 +914,7 @@ let scanTests = {
       (
         S.range(1, 999_999)
         ->S.scan(-1, (_, i) => i)
-        ->S.map(Int.toString)
+        ->S.map(Int.toString(_))
         ->S.last
         ->Option.map(s => S.once(s))
         ->Option.getOr(S.once("")),
@@ -962,7 +962,7 @@ let intersperseTests = makeSeqEqualsTests(
 )
 
 let intersperseWithTests = {
-  let f = () => S.range(1, 100)->S.map(Int.toString)->toDispenser
+  let f = () => S.range(1, 100)->S.map(Int.toString(_))->toDispenser
   makeSeqEqualsTests(
     ~title="intersperseWith",
     [
@@ -1944,20 +1944,19 @@ let splitTests = {
 }
 
 let (combinationTests, permutationTests) = {
-  let sortLetters = w =>
-    w->String.split("")->Array.toSorted(String.localeCompare)->Array.joinWith("")
+  let sortLetters = w => w->String.split("")->Array.toSorted(String.localeCompare)->Array.join("")
   let sortOutput = combos =>
     combos
     ->S.map(combo => combo->S.reduce("", (sum, i) => sum ++ i)->sortLetters)
     ->S.sortBy(String.localeCompare)
     ->S.toArray
-    ->Array.joinWith(",")
+    ->Array.join(",")
   let sort = words =>
     words
     ->String.split(",")
     ->Array.map(sortLetters)
     ->Array.toSorted(String.localeCompare)
-    ->Array.joinWith(",")
+    ->Array.join(",")
   let combos = (letters, k) => letters->String.split("")->S.fromArray->S.combinations(k)
   let comboString = (letters, k) => combos(letters, k)->S.map(((_, combo)) => combo)->sortOutput
   let permutes = (letters, k) => letters->String.split("")->S.fromArray->S.permutations(k)

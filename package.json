@@ -21,8 +21,7 @@
   "author": "Justin Magaram",
   "license": "ISC",
   "dependencies": {
-    "@rescript/core": "^1.1.0",
-    "rescript": "^11.0.1"
+    "rescript": "^12.0.0-alpha.6"
   },
   "files": [
     "rescript.json",
@@ -31,7 +30,7 @@
     "src/**/*.gen.tsx"
   ],
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.9"
   },
   "homepage": "https://github.com/jmagaram/rescript-seq#readme",
   "repository": {
