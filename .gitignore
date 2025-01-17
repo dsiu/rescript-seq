@@ -2,4 +2,5 @@
 node_modules
 lib
 **/*.bs.js
+**/*.res.mjs
 .DS_Store
