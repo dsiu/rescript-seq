@@ -21,7 +21,7 @@
   "author": "Justin Magaram",
   "license": "ISC",
   "dependencies": {
-    "rescript": "^12.0.0-beta.6"
+    "rescript": "^12.0.0-beta.7"
   },
   "files": [
     "rescript.json",
