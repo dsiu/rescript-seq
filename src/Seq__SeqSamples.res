@@ -82,7 +82,7 @@ type sale = {empId: string, amount: int}
 let sortByEmployee = (a, b) => {
   let a = a.empId
   let b = b.empId
-  String.localeCompare(a, b)
+  String.compare(a, b)
 }
 
 let salesSummary = sales => {

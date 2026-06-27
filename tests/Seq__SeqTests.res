@@ -1342,7 +1342,7 @@ let compareTests = [
     ~a=() => {
       let xs = xs->characters
       let ys = ys->characters
-      S.compare(xs, ys, String.localeCompare)
+      S.compare(xs, ys, String.compare)
     },
     ~b=expected->Int.toFloat,
   )
@@ -1944,18 +1944,18 @@ let splitTests = {
 }
 
 let (combinationTests, permutationTests) = {
-  let sortLetters = w => w->String.split("")->Array.toSorted(String.localeCompare)->Array.join("")
+  let sortLetters = w => w->String.split("")->Array.toSorted(String.compare)->Array.join("")
   let sortOutput = combos =>
     combos
     ->S.map(combo => combo->S.reduce("", (sum, i) => sum ++ i)->sortLetters)
-    ->S.sortBy(String.localeCompare)
+    ->S.sortBy(String.compare)
     ->S.toArray
     ->Array.join(",")
   let sort = words =>
     words
     ->String.split(",")
     ->Array.map(sortLetters)
-    ->Array.toSorted(String.localeCompare)
+    ->Array.toSorted(String.compare)
     ->Array.join(",")
   let combos = (letters, k) => letters->String.split("")->S.fromArray->S.combinations(k)
   let comboString = (letters, k) => combos(letters, k)->S.map(((_, combo)) => combo)->sortOutput
