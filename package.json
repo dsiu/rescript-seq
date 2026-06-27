@@ -1,5 +1,6 @@
 {
   "name": "@jmagaram/rescript-seq",
+  "packageManager": "yarn@4.17.0",
   "version": "4.4.1",
   "module": "",
   "description": "Lazy sequences for ReScript.",
